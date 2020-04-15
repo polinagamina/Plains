@@ -1,9 +1,12 @@
 package com.example.gamina.tableObjects;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 @Table(name = "plains")
 
 public class Plain {
@@ -32,74 +35,5 @@ public class Plain {
 
     @Column(name = "Track")
     private String track;
-
-
-
-
-    public Integer getPlainId() {
-        return plainId;
-    }
-
-    public void setPlainId(Integer plainId) {
-        this.plainId = plainId;
-    }
-
-    public String getHexId() {
-        return HexId;
-    }
-
-    public void setHexId(String hexId) {
-        HexId = hexId;
-    }
-
-    public String getFlight() {
-        return flight;
-    }
-
-    public void setFlight(String flight) {
-        this.flight = flight;
-    }
-
-    public String getAltitude() {
-        return altitude;
-    }
-
-    public void setAltitude(String altitude) {
-        this.altitude = altitude;
-    }
-
-    public String getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(String speed) {
-        this.speed = speed;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getTrack() {
-        return track;
-    }
-
-    public void setTrack(String track) {
-        this.track = track;
-    }
-
-
 
 }
