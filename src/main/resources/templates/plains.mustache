@@ -1,0 +1,40 @@
+<html>
+<body>
+
+<!--div>
+    <form method="post">
+        <input type="text" name="plainId" placeholder="Введите уникальный идентификатор самолета"/>
+        <input type="text" name="HexId" placeholder="Введите уникальный идентификатор"/>
+        <input type="text" name="flight" placeholder="Введите рейс"/>
+        <input type="text" name="altitude" placeholder="Введите высоту"/>
+        <input type="text" name="speed" placeholder="Введите скорость"/>
+        <input type="text" name="latitude" placeholder="Введите широту"/>
+        <input type="text" name="longitude" placeholder="Введите долготу"/>
+        <input type="text" name="track" placeholder="Введите трэк"/>
+        <input type="text" name="messages" placeholder="Введите сообщение"/>
+        <button type="submit">Добавить</button>
+    </form>
+</div-->
+<div><b>Список самолетов:</b></div>
+{{#plains}}
+    <div>
+        <span>{{plainId}}</span>
+        <b>|</b>
+        <i>{{HexId}}</i>
+        <b>|</b>
+        <span>{{flight}}</span>
+        <b>|</b>
+        <b>{{altitude}}</b>
+        <b>|</b>
+        <span>{{speed}}</span>
+        <b>|</b>
+        <i>{{latitude}}</i>
+        <b>|</b>
+        <span>{{longitude}}</span>
+        <b>|</b>
+        <i>{{track}}</i>
+
+    </div>
+{{/plains}}
+</body>
+</html>
