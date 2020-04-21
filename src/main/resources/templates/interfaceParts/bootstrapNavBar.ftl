@@ -29,7 +29,15 @@
                     <a class="nav-link" href="/managers">Диспетчеры</a>
                 </li>
             </ul>
-            <div class="navbar-text">${name}</div>
+            <#if isAdmin>
+                <div class="navbar-text mr-3">Hi, ${name}!</div>
+                <div>
+                    <form action="/logout" method="post">
+                        <#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+                        <button type="submit" class="btn btn-outline-info waves-effect">Sign Out</button>
+                    </form>
+                </div>
+            </#if>
         </div>
     </nav>
 </#macro>

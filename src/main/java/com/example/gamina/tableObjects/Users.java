@@ -30,9 +30,17 @@ public class Users implements UserDetails {
     private Set<Roles> roles;
 
     public boolean isAdmin() {
+
         return roles.contains(Roles.ADMIN);
     }
+    public boolean isUser() {
 
+        return roles.contains(Roles.USER);
+    }
+    public boolean isManager() {
+
+        return roles.contains(Roles.MANAGER);
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
