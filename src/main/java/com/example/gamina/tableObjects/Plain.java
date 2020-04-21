@@ -16,7 +16,7 @@ public class Plain {
     private Integer plainId;
 
     @Column(name = "HEX_id", nullable = false)
-    private String HexId;
+    private String hexId;
 
     @Column(name = "Flight")
     private String flight;
