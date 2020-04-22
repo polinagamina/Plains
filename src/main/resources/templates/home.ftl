@@ -12,14 +12,14 @@
 <body>
 <@navBarWithSignBtn.bootstrapNavbarWithSignBtn/>
 <div class="view">
-    <img src="https://images.wallpaperscraft.ru/image/doroga_noch_svet_125999_1920x1080.jpg" class="img-fluid"
+    <img src="https://a-static.besthdwallpaper.com/vid-samoleta-zakata-oboi-2560x1600-4332_7.jpg" class="img-fluid"
          alt="" style="width: 100%; height: 100%">
     <div class="mask pattern-1 flex-center waves-effect waves-light">
         <h1><p class="white-text">Добро пожаловать на наш Центр Отслеживания полетов</p></h1>
     </div>
 </div>
 <footer class="page-footer font-small black">
-    <div class="footer-copyright text-center py-3">© Центр отслеживания полетов, 2020:</div>
+    <div class="footer-copyright text-center py-3">© Центр отслеживания полетов, 2020</div>
 </footer>
 <@bootstrapFooterScripts.bootstrapFooterScripts/>
 </body>

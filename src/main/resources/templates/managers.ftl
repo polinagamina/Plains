@@ -89,28 +89,28 @@
     </#if>
     <a class="btn btn-primary" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false"
        aria-controls="collapseExample">
-        Открыть меню изменения информации о существующем в системе менеджере
+        Открыть меню изменения информации о существующем в системе диспетчера
     </a>
     <div class="collapse" id="collapse1">
         <div class="form-group mt-3">
             <form action="/managersUpdate" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control" name="managerId"
-                           placeholder="Введите ID менеджера, информацию о котором нужно изменить..."/>
+                           placeholder="Введите ID диспетчера, информацию о котором нужно изменить..."/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="firstName" placeholder="Изменить имя менеджера..."/>
+                    <input type="text" class="form-control" name="firstName" placeholder="Изменить имя диспетчера..."/>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="lastName"
-                           placeholder="Изменить фамилию менеджера..."/>
+                           placeholder="Изменить фамилию диспетчера..."/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="email" placeholder="Изменить e-mail менеджера..."/>
+                    <input type="text" class="form-control" name="email" placeholder="Изменить e-mail диспетчера..."/>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="phoneNumber"
-                           placeholder="Изменить телефон менеджера..."/>
+                           placeholder="Изменить телефон диспетчера..."/>
                 </div>
                 <#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
                 <div class="form-group">
@@ -123,23 +123,23 @@
 <div class="container mt-5 ml-5">
     <a class="btn btn-primary" data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false"
        aria-controls="collapse2">
-        Открыть меню добавления нового менеджера в систему
+        Открыть меню добавления нового диспетчера в систему
     </a>
     <div class="collapse" id="collapse2">
         <div class="form-group mt-3">
             <form action="/managers" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="firstName" placeholder="Введите имя менеджера..."/>
+                    <input type="text" class="form-control" name="firstName" placeholder="Введите имя диспетчера..."/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="lastName" placeholder="Введите фамилию менеджера..."/>
+                    <input type="text" class="form-control" name="lastName" placeholder="Введите фамилию диспетчера..."/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="email" placeholder="Введите e-mail менеджера..."/>
+                    <input type="text" class="form-control" name="email" placeholder="Введите e-mail диспетчера..."/>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="phoneNumber"
-                           placeholder="Введите телефон менеджера..."/>
+                           placeholder="Введите телефон диспетчера..."/>
                 </div>
 
                 <#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
@@ -174,7 +174,7 @@
             </tr>
         <#else>
             <tr>
-                <th scope="row">List of managers is empty yet!</th>
+                <th scope="row">Пока еще нет ни одного диспетчера!</th>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -188,7 +188,7 @@
 <div class="container" style="height: 500px">
 </div>
 <footer class="page-footer font-small black">
-    <div class="footer-copyright text-center py-3">© Цоп, 2019:</div>
+    <div class="footer-copyright text-center py-3">© Центр отслеживания полетов, 2020</div>
 </footer>
 <@bootstrapFooterScripts.bootstrapFooterScripts/>
 </body>

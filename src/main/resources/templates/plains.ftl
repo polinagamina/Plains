@@ -16,7 +16,7 @@
      style="background-image: url(https://mdbootstrap.com/img/Photos/Others/gradient1.jpg);">
     <div class="text-black text-center py-5 px-4">
         <div>
-            <h1 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>Plains page</strong></h1>
+            <h1 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>Информация о самолетах</strong></h1>
         </div>
     </div>
 </div>
@@ -174,7 +174,7 @@
             </tr>
         <#else>
             <tr>
-                <th scope="row">List of plains is empty yet!</th>
+                <th scope="row">Пока в системе нет одного самолета!</th>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -191,7 +191,7 @@
 <div class="container" style="height: 500px">
 </div>
 <footer class="page-footer font-small black">
-    <div class="footer-copyright text-center py-3">© ЦОП, 2020:</div>
+    <div class="footer-copyright text-center py-3">© Центр отслеживания полетов,2020:</div>
 </footer>
 <@bootstrapFooterScripts.bootstrapFooterScripts/>
 </body>

@@ -16,13 +16,13 @@
 <div class="container mt-5 ml-5" style="width: 500px">
     <div class="card">
         <h3 class="card-header info-color white-text text-center py-4">
-            <strong>Authorization</strong>
+            <strong>Авторизация</strong>
         </h3>
         <div class="card-body">
             <#if error??>
                 <div class="alert alert-danger alert-dismissible fade show mt-3 ml-2" role="alert" style="width: 414px">
-                    <span>  Invalid username or password. Please, <a href="/registration"
-                                                                     class="alert-link">register</a>, if you haven’t done so yet.</span>
+                    <span>  Неправильное имя пользователя или пароль. Пожалуйста, <a href="/registration"
+                                                                     class="alert-link">зарегистрируйтесь</a>, если вы этого еще не делали.</span>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -30,7 +30,7 @@
             </#if>
             <#if logout??>
                 <div class="alert alert-info alert-dismissible fade show mt-3 ml-2" role="alert" style="width: 414px">
-                    You have been logged out.
+                    Вы вышли с сайта.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -42,23 +42,23 @@
                 <div class="md-form">
                     <i class="fa fa-user prefix grey-text"></i>
                     <input type="text" name="username" id="materialFormCardNameEx" class="form-control">
-                    <label for="materialFormCardNameEx" class="font-weight-light">Your name...</label>
+                    <label for="materialFormCardNameEx" class="font-weight-light">Ваш логин...</label>
                 </div>
 
                 <div class="md-form">
                     <i class="fa fa-lock prefix grey-text"></i>
                     <input type="password" name="password" id="materialFormCardPasswordEx" class="form-control">
-                    <label for="materialFormCardPasswordEx" class="font-weight-light">Your password...</label>
+                    <label for="materialFormCardPasswordEx" class="font-weight-light">Ваш пароль...</label>
                 </div>
 
                 <#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
                 <div class="text-center py-4 mt-3">
-                    <button class="btn btn-outline-info" type="submit">Sign In</button>
+                    <button class="btn btn-outline-info" type="submit">Войти</button>
                 </div>
 
                 <div class="text-center">
-                    <p>Not a member?
-                        <a href="/registration">Register</a>
+                    <p>Еще не участник нашего центра?
+                        <a href="/registration">Регистрация</a>
                     </p>
                 </div>
             </form>
@@ -68,7 +68,7 @@
 <div class="container" style="height: 500px">
 </div>
 <footer class="page-footer font-small black">
-    <div class="footer-copyright text-center py-3">© Delivery Service, 2019:</div>
+    <div class="footer-copyright text-center py-3">© Центр отслеживания полетов, 2020</div>
 </footer>
 <@bootstrapFooterScripts.bootstrapFooterScripts/>
 </body>
