@@ -12,7 +12,7 @@
 <body>
 <@navBarWithSignBtn.bootstrapNavbarWithSignBtn/>
 <div class="view">
-    <img src="https://a-static.besthdwallpaper.com/vid-samoleta-zakata-oboi-2560x1600-4332_7.jpg" class="img-fluid"
+    <img src="https://99px.ru/sstorage/53/2017/04/tmb_198712_6526.jpg" class="img-fluid"
          alt="" style="width: 100%; height: 100%">
     <div class="mask pattern-1 flex-center waves-effect waves-light">
         <h1><p class="white-text">Добро пожаловать на наш Центр Отслеживания полетов</p></h1>

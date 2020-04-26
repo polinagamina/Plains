@@ -33,13 +33,10 @@
         <div class="form-group col-md-6">
             <form action="/plainsFilter" method="post" class="form-inline">
                 <div class="form-group row">
-                    <div class="md-form form-lg ml-4">
-                        <input type="text" name="plainId" id="input" class="form-control form-control-lg">
-                        <label for="input">Найти по ID...</label>
-                    </div>
+
                     <div class="md-form form-lg ml-3">
                         <input type="text" name="hexId" id="inpu" class="form-control form-control-lg">
-                        <label for="inpu">Найти по Hex номеру...</label>
+                        <label for="inpu">Найти по HexId...</label>
                     </div>
                     <div class="md-form form-lg ml-3">
                         <input type="text" name="flight" id="inp" class="form-control form-control-lg">
@@ -68,7 +65,7 @@
             <form action="/plainsDelete" method="post" class="form-inline">
                 <div class="form-group row">
                     <div class="md-form form-lg ml-4">
-                        <input type="text" name="plainId" id="in" class="form-control form-control-lg">
+                        <input type="text" name="hexId" id="in" class="form-control form-control-lg">
                         <label for="in">Удалить по ID...</label>
                     </div>
                     <#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
@@ -132,6 +129,10 @@
         </div>
     </div>
 </div>
+
+<div>
+    <a class="btn btn-primary" href="http://localhost:8080/plainsCur" target="_blank" role="button">Посмотреть текущие самолеты</a>
+</div>
 <!--div>
     <form method="post">
         <input type="text" name="plainId" placeholder="Введите уникальный идентификатор самолета"/>
@@ -150,7 +151,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">ID</th>
+
             <th scope="col">HexID</th>
             <th scope="col">Рейс</th>
             <th scope="col">Высота</th>
@@ -163,8 +164,7 @@
         <tbody>
         <#list plains as plain>
             <tr>
-                <th scope="row">${plain.plainId}</th>
-                <td>${plain.hexId}</td>
+                <th scope="row">${plain.hexId}</th>
                 <td>${plain.flight}</td>
                 <td>${plain.altitude}</td>
                 <td>${plain.speed}</td>
@@ -175,7 +175,6 @@
         <#else>
             <tr>
                 <th scope="row">Пока в системе нет одного самолета!</th>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>

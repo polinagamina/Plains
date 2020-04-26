@@ -1,21 +1,23 @@
 package com.example.gamina.controllers;
 
 import com.example.gamina.repositories.PlainRepository;
+
+import com.example.gamina.service.PlainListService;
+
 import com.example.gamina.tableObjects.Plain;
+import com.example.gamina.tableObjects.PlainList;
+
 import com.example.gamina.tableObjects.SkyManager;
-import com.example.gamina.tableObjects.Users;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,94 +26,77 @@ import java.util.Map;
 public class PlainController {
 
     private PlainRepository plainRepository;
-
+    private PlainListService plainListService;
     @Autowired
-    public PlainController(PlainRepository plainRepository) {
+    public PlainController(PlainRepository plainRepository, PlainListService plainListService) {
 
         this.plainRepository=plainRepository;
+        this.plainListService=plainListService;
     }
+
     @GetMapping("/plains")
     public String plainsView(Map<String, Object> model) {
-        Plain plain = new Plain();
-        try {
-            String link = "http://192.168.1.54:8080/data.json";
-            URL url = new URL(link);
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(url.openStream()));
-            String inputLine;
-            String line="";
-            String l1="[]";
-            while ((inputLine = in.readLine()) != null){
-                line=line + inputLine;
+        Plain plain=new Plain();
+        List<PlainList>plainsServ=plainListService.getAllPlains();
+        for(PlainList p:plainsServ){
+            if (plainRepository.findByHexId(p.getHexId()).isEmpty()){
+                plain.setHexId(p.getHexId());
+                plain.setSpeed(p.getSpeed());
+                plain.setLongitude(p.getLongitude());
+                plain.setLatitude(p.getLatitude());
+                plain.setAltitude(p.getAltitude());
+                plain.setFlight(p.getFlight());
+                plain.setTrack(p.getTrack());
+                plainRepository.save(plain);
             }
-                if(line.equals(l1)){
-                    Iterable<Plain> plains = plainRepository.findAll();
-                    model.put("plains", plains);
-                }
-                else{
-                String[]lines=line.split(",");
-                ArrayList<String> plainEnt=new ArrayList<String>();
-                for(String info : lines) {
-                    String[] l = info.split(":");
-                        String s = l[1].replaceAll("[^A-Za-zА-Яа-я0-9-.]", "").trim();
-                        plainEnt.add(s);
-                        if (plainEnt.size()==7){
-                            for (int i = 0; i < 1; i++) {
-                            plain.setHexId(plainEnt.get(i));
-                            if(plainEnt.get(i + 1)==null) {
-                                plain.setFlight("0");
-                            }
-                            else {
-                            plain.setFlight(plainEnt.get(i + 1));
-                            }
-                            plain.setLatitude(plainEnt.get(i + 2));
-                            plain.setLongitude(plainEnt.get(i + 3));
-                            plain.setAltitude(plainEnt.get(i + 4));
-                            if(plainEnt.get(i + 5)==null) {
-                                    plain.setTrack("0");
-                            }
-                            else {
-                            plain.setTrack(plainEnt.get(i + 5));
-                            }
-                            if(plainEnt.get(i + 6)==null) {
-                                    plain.setSpeed("0");
-                            }
-                            else {
-                                plain.setSpeed(plainEnt.get(i + 6));
-                            }
-                            plainRepository.save(plain);
-                        }
-                        }
-                    }
-                    in.close();
-                    Iterable<Plain> plains = plainRepository.findAll();
-                    model.put("plains", plains);
-
-                }
         }
-        catch (IOException ex){
-            System.out.println("Interruption");
-        }
+        Iterable<Plain> plains=plainRepository.findAll();
+        model.put("plains",plains);
         return "plains";
+    }
+    @GetMapping("/plainsCur")
+    public String plainsGet(Map<String, Object> model) {
+        List<PlainList>plainsCur=plainListService.getAllPlains();
+        model.put("plainsCur",plainsCur);
+        return "plainsCur";
     }
 
     @Transactional
     @PostMapping("/plainsDelete")
-    public String deletePlain(@RequestParam Integer plainId, Map<String, Object> model) {
-        List<Plain> plain = plainRepository.findByPlainId(plainId);
+    public String deletePlain(@RequestParam String hexId, Map<String, Object> model) {
+        List<Plain> plain = plainRepository.findByHexId(hexId);
         if (plain.isEmpty()) {
             model.put("deleteIdCheck", "No plain with such index!");
             return "plains";
         } else {
-            plainRepository.deleteByPlainId(plainId);
+            plainRepository.deleteByHexId(hexId);
         }
         return "redirect:/plains";
     }
-
-    @Transactional
+    @PostMapping("/plainsFilter")
+    public String findPlain(//@RequestParam(required = false) Integer plainId,
+                              @RequestParam(required = false) String hexId,
+                              @RequestParam(required = false) String flight,
+                              Map<String, Object> model) {
+        Iterable<Plain> plains;
+        if (!hexId.isEmpty() & flight.isEmpty()) {
+            plains=plainRepository.findByHexId(hexId);
+        } else if (hexId.isEmpty() & !flight.isEmpty()) {
+            plains=plainRepository.findByFlight(flight);
+        } else {
+            plains = plainRepository.findAll();
+        }
+        if (!plains.iterator().hasNext()) {
+            model.put("filterCheck", "No plain with such index!");
+            return "plains";
+        } else {
+            model.put("plains", plains);
+        }
+        return "plains";
+    }
+   @Transactional
     @PostMapping("/plainsUpdate")
-    public String updatePlain(@RequestParam Integer plainId,
-                                @RequestParam(required = false) String hexId,
+    public String updatePlain(@RequestParam String hexId,
                                 @RequestParam(required = false) String flight,
                                 @RequestParam(required = false) String altitude,
                                 @RequestParam(required = false) String speed,
@@ -119,51 +104,48 @@ public class PlainController {
                                 @RequestParam(required = false) String longitude,
                                 @RequestParam(required = false) String track,
                                 Map<String, Object> model) {
-        List<Plain> plain = plainRepository.findByPlainId(plainId);
+        List<Plain> plain = plainRepository.findByHexId(hexId);
         if (plain.isEmpty()) {
             model.put("updateIdCheck", "Plain with such index does not exist!");
             return "plains";
         } else {
-            if (!hexId.isEmpty()) {
-                plainRepository.setHexIdFor(hexId, plainId);
-            }
             if (!flight.isEmpty()) {
-                plainRepository.setFlightFor(flight, plainId);
+                plainRepository.setFlightF(flight, hexId);
             }
             if (!altitude.isEmpty()) {
-                plainRepository.setAltitudeFor(altitude, plainId);
+                plainRepository.setAltitudeF(altitude, hexId);
             }
             if (!speed.isEmpty()) {
-                plainRepository.setSpeedFor(speed, plainId);
+                plainRepository.setSpeedF(speed, hexId);
             }
             if (!latitude.isEmpty()) {
-                plainRepository.setLatitudeFor(latitude, plainId);
+                plainRepository.setLatitudeF(latitude, hexId);
             }
             if (!longitude.isEmpty()) {
-                plainRepository.setLongitudeFor(longitude, plainId);
+                plainRepository.setLongitudeF(longitude, hexId);
             }
             if (!track.isEmpty()) {
-                plainRepository.setTrackFor(track, plainId);
+                plainRepository.setTrackF(track, hexId);
             }
         }
         return "redirect:/plains";
     }
-    @PostMapping("/plainsFilter")
-    public String findPlainAnd(@RequestParam(required = false) Integer plainId,
-                              @RequestParam(required = false) String HexId,
+   /** @PostMapping("/plainsFilt")
+    public String findPlain(@RequestParam(required = false)String HexId,
                               @RequestParam(required = false) String flight,
                               Map<String, Object> model) {
-        Iterable<Plain> plains;
-        if (plainId != null & HexId.isEmpty() & flight.isEmpty()) {
-            plains = plainRepository.findByPlainId(plainId);
-        } else if (plainId == null & !HexId.isEmpty() & flight.isEmpty()) {
-            plains = plainRepository.findByHexId(HexId);
-        } else if (plainId == null & HexId.isEmpty() & !flight.isEmpty()) {
-            plains = plainRepository.findByFlight(flight);
-        } else {
-            plains = plainRepository.findAll();
+        System.out.println(HexId);
+        System.out.println(flight);
+        List<PlainList>plains =new ArrayList<>();
+        if (!HexId.isEmpty() & flight.isEmpty()) {
+            plains = plainListService.searchByHexId(HexId);
+        } else if (HexId.isEmpty() & !flight.isEmpty()) {
+            plains = plainListService.searchByFlight(flight);
         }
-        if (!plains.iterator().hasNext()) {
+        else {
+            plains = plainListService.getAllPlains();
+        }
+        if (plains.isEmpty()) {
             model.put("filterCheck", "No plains with such parametres!");
             return "plains";
         } else {
@@ -171,4 +153,6 @@ public class PlainController {
         }
         return "plains";
     }
+**/
+
 }
