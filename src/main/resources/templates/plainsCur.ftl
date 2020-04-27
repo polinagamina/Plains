@@ -8,11 +8,11 @@
     <@bootstrapHeaderLinks.bootstrapHeaderLinks/>
     <title>Plains</title>
 </head>
-<!--script>
+<script>
     setTimeout(function () {
     location.reload();
-    },30000);
-    </script-->
+    },5000);
+    </script>
 <body>
 <@navBarWithSignBtn.bootstrapNavbarWithSignBtn/>
 <div class="container" style="height: 70px">
@@ -21,7 +21,7 @@
      style="background-image: url(https://mdbootstrap.com/img/Photos/Others/gradient1.jpg);">
     <div class="text-black text-center py-5 px-4">
         <div>
-            <h1 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>Информация о самолетах</strong></h1>
+            <h1 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>Информация о текущих самолетах</strong></h1>
         </div>
     </div>
 </div>
@@ -36,15 +36,16 @@
     </#if>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <form action="/plainsFilt" method="post" class="form-inline">
+            <form action="/plainsCurFilter" method="post" class="form-inline">
                 <div class="form-group row">
+
                     <div class="md-form form-lg ml-3">
-                        <input type="text" name="hex" id="input" class="form-control form-control-lg">
-                        <label for="input">Найти по Hex номеру...</label>
+                        <input type="text" name="hexId" id="inpu" class="form-control form-control-lg">
+                        <label for="inpu">Найти по HexId...</label>
                     </div>
                     <div class="md-form form-lg ml-3">
-                        <input type="text" name="flight" id="inpu" class="form-control form-control-lg">
-                        <label for="inpu">Найти по рейсу...</label>
+                        <input type="text" name="flight" id="inp" class="form-control form-control-lg">
+                        <label for="inp">Найти по рейсу...</label>
                     </div>
                     <#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
                     <div>
@@ -55,8 +56,8 @@
         </div>
     </div>
 </div>
-<div>
-    <a class="btn btn-primary" href="http://192.168.1.54:8080" target="_blank" role="button">Посмотреть самолеты</a>
+<div class="container mt-5 ml-5">
+    <a class="btn btn-primary" href="http://192.168.1.54:8080" target="_blank" role="button">Посмотреть самолеты на карте</a>
 </div>
 <div class="container mt-5 ml-5">
     <table class="table table-striped">
@@ -84,7 +85,7 @@
             </tr>
         <#else>
             <tr>
-                <th scope="row">Пока в системе нет одного самолета!</th>
+                <th scope="row">Пока в системе нет ни одного самолета!</th>
                 <td></td>
                 <td></td>
                 <td></td>

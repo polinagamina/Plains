@@ -54,19 +54,14 @@ public class PlainController {
         model.put("plains",plains);
         return "plains";
     }
-    @GetMapping("/plainsCur")
-    public String plainsGet(Map<String, Object> model) {
-        List<PlainList>plainsCur=plainListService.getAllPlains();
-        model.put("plainsCur",plainsCur);
-        return "plainsCur";
-    }
+
 
     @Transactional
     @PostMapping("/plainsDelete")
     public String deletePlain(@RequestParam String hexId, Map<String, Object> model) {
         List<Plain> plain = plainRepository.findByHexId(hexId);
         if (plain.isEmpty()) {
-            model.put("deleteIdCheck", "No plain with such index!");
+            model.put("deleteIdCheck", "Самолета с таким индексом нет!");
             return "plains";
         } else {
             plainRepository.deleteByHexId(hexId);
@@ -87,7 +82,8 @@ public class PlainController {
             plains = plainRepository.findAll();
         }
         if (!plains.iterator().hasNext()) {
-            model.put("filterCheck", "No plain with such index!");
+            model.put("filterCheck", "Самолета с такими параметрами не существует");
+            model.put("plains", plains);
             return "plains";
         } else {
             model.put("plains", plains);
@@ -106,7 +102,7 @@ public class PlainController {
                                 Map<String, Object> model) {
         List<Plain> plain = plainRepository.findByHexId(hexId);
         if (plain.isEmpty()) {
-            model.put("updateIdCheck", "Plain with such index does not exist!");
+            model.put("updateIdCheck", "Самолета с таким индексом не существует");
             return "plains";
         } else {
             if (!flight.isEmpty()) {
@@ -130,29 +126,6 @@ public class PlainController {
         }
         return "redirect:/plains";
     }
-   /** @PostMapping("/plainsFilt")
-    public String findPlain(@RequestParam(required = false)String HexId,
-                              @RequestParam(required = false) String flight,
-                              Map<String, Object> model) {
-        System.out.println(HexId);
-        System.out.println(flight);
-        List<PlainList>plains =new ArrayList<>();
-        if (!HexId.isEmpty() & flight.isEmpty()) {
-            plains = plainListService.searchByHexId(HexId);
-        } else if (HexId.isEmpty() & !flight.isEmpty()) {
-            plains = plainListService.searchByFlight(flight);
-        }
-        else {
-            plains = plainListService.getAllPlains();
-        }
-        if (plains.isEmpty()) {
-            model.put("filterCheck", "No plains with such parametres!");
-            return "plains";
-        } else {
-            model.put("plains", plains);
-        }
-        return "plains";
-    }
-**/
+
 
 }

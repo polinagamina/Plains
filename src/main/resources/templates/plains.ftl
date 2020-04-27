@@ -130,7 +130,7 @@
     </div>
 </div>
 
-<div>
+<div class="container mt-5 ml-5">
     <a class="btn btn-primary" href="http://localhost:8080/plainsCur" target="_blank" role="button">Посмотреть текущие самолеты</a>
 </div>
 <!--div>
@@ -174,7 +174,7 @@
             </tr>
         <#else>
             <tr>
-                <th scope="row">Пока в системе нет одного самолета!</th>
+                <th scope="row">Пока в системе нет ни одного самолета!</th>
                 <td></td>
                 <td></td>
                 <td></td>

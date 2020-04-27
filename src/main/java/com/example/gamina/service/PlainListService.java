@@ -27,7 +27,7 @@ public class PlainListService {
     }
 
     @PostConstruct
-   // @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "* * * * * *")
     public void getPlanes() throws IOException {
         List<PlainList> newPlains = new ArrayList<>();
         HashMap<String, PlainList> plainMap = new HashMap<>();
